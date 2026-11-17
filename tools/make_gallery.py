@@ -64,6 +64,8 @@ def main():
          "<h3 style='margin-top:10px'>Уровень 1 — погоня</h3></div>",
          "<div class='card'><img src='gameplay-2.png' alt='Уровень 2'>"
          "<h3 style='margin-top:10px'>Уровень 2 — дуэль</h3></div>",
+         "<div class='card'><img src='gameplay-3.png' alt='Посадка на Набу'>"
+         "<h3 style='margin-top:10px'>Интерлюдия — посадка на Набу</h3></div>",
          "</div>"]
 
     # персонажи
@@ -90,18 +92,13 @@ def main():
 
     # фоны
     p.append("<h2>Фоны — 480×360</h2><div class='grid'>")
-    p.append("<div class='card'><img src='../assets/film/backdrops/title.png' alt='Титул'>"
-             "<h3 style='margin-top:10px'>Титул</h3>"
-             "<div class='sub' style='margin:0;font-size:13px'>кинематографичный</div></div>")
-    p.append("<div class='card'><img src='../assets/film/backdrops/space.png' alt='Космос'>"
-             "<h3 style='margin-top:10px'>Космос</h3>"
-             "<div class='sub' style='margin:0;font-size:13px'>кинематографичный</div></div>")
-    for slug, title in (("03-naboo", "Посадка на Набу"), ("04-generator", "Генераторная"),
-                        ("05-victory", "Победа")):
-        p.append(f"<div class='card pending'><img src='png/backdrop-{slug}.png' "
+    for slug, title in (("title", "Титул"), ("space", "Космос"),
+                        ("naboo", "Посадка на Набу"), ("generator", "Генераторная"),
+                        ("victory", "Победа")):
+        b = next(x for x in FM["backdrops"] if x["slug"] == slug)
+        p.append(f"<div class='card'><img src='../assets/film/{b['file']}' "
                  f"alt='{esc(title)}'><h3 style='margin-top:10px'>{esc(title)}</h3>"
-                 f"<div class='sub' style='margin:0;font-size:13px'>векторная версия — "
-                 f"кинематографичная в работе</div></div>")
+                 f"<div class='sub' style='margin:0;font-size:13px'>кинематографичный</div></div>")
     p.append("</div>")
 
     # эффекты
@@ -109,10 +106,14 @@ def main():
     for slug, title in (("laser", "Лазер"), ("enemy-laser", "Лазер врага"),
                         ("explosion", "Взрыв"), ("sparks", "Искры"),
                         ("plasma-gate", "Плазма-врата")):
-        vs = next(s for s in VM["sprites"] if s["slug"] == slug)
+        if slug in FS:                      # кинематографичный вариант
+            src = [(f"../assets/film/{c['file']}", c["name"]) for c in FS[slug]["costumes"]]
+        else:
+            vs = next(s for s in VM["sprites"] if s["slug"] == slug)
+            src = [(f"png/sprite-{slug}-{i+1:02d}.png", c["name"])
+                   for i, c in enumerate(vs["costumes"])]
         imgs = "".join(
-            f"<img src='png/sprite-{slug}-{i+1:02d}.png' alt='{esc(c['name'])}' "
-            f"style='height:90px'>" for i, c in enumerate(vs["costumes"]))
+            f"<img src='{u}' alt='{esc(n)}' style='height:90px'>" for u, n in src)
         p.append(f"<div class='card'><div style='display:flex;gap:8px;justify-content:center;"
                  f"background:repeating-conic-gradient(#1b2231 0% 25%,#222b3c 0% 50%) 50%/14px 14px;"
                  f"border-radius:8px;padding:8px'>{imgs}</div>"

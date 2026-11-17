@@ -24,6 +24,7 @@
 ```
 assets/
   backdrops/    01-title.svg  02-space.svg  03-naboo.svg  04-generator.svg  05-victory.svg
+  film/         кино-версия: sprites/*.png, backdrops/{title,space,naboo,generator,victory}.png
   sprites/
     quigon/         10 костюмов: стойка, шаг-1…шаг-4, прыжок, удар-1, удар-2, блок, ранен
     obiwan/         10 костюмов (те же имена)
@@ -44,6 +45,10 @@ assets/
 Переименуйте фон так, как в таблице ниже (это важно: скрипты переключают фоны по имени).
 
 **Импорт костюма:** спрайт → вкладка «Костюмы» → «Загрузить» → выбрать `.svg`.
+
+> Для кинематографичной версии вместо `.svg` берите PNG из `assets/film/`:
+> фоны `title.png`, `space.png`, `naboo.png`, `generator.png`, `victory.png`
+> и костюмы из `assets/film/sprites/<имя>/`. Прозрачность PNG Scratch сохраняет.
 Имена костюмов тоже должны совпадать — на них ссылаются блоки «переключить костюм».
 
 ---

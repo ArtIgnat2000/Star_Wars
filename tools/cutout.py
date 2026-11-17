@@ -2,12 +2,13 @@
 """Вырезание сгенерированных картинок с хромакея (плоский пурпурный фон) в PNG с альфой."""
 import os
 import sys
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageChops, ImageDraw, ImageFilter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def cutout(src, dst, tol=78, pad=8, target_h=None, despill=0.9, feather=0.8, verbose=True):
+def cutout(src, dst, tol=78, pad=8, target_h=None, despill=0.9, feather=0.8,
+           kill_bg=True, verbose=True):
     im = Image.open(src).convert("RGBA")
     w, h = im.size
     # 1) заливка фона от углов
@@ -16,6 +17,10 @@ def cutout(src, dst, tol=78, pad=8, target_h=None, despill=0.9, feather=0.8, ver
             ImageDraw.floodfill(im, seed, (0, 0, 0, 0), thresh=tol)
         except Exception:
             pass
+
+    # 1.5) добиваем пурпур, который заливка не достала (замкнутые области, ореол меча)
+    if kill_bg:
+        im = key_out(im)
 
     px = im.load()
     # 2) деспилл пурпурного по краям + чистка альфы
@@ -31,11 +36,12 @@ def cutout(src, dst, tol=78, pad=8, target_h=None, despill=0.9, feather=0.8, ver
                 b = int(max(0, b - k))
                 px[x, y] = (r, g, b, a)
 
-    # 3) мягкая кромка по альфе
+    # 3) мягкая кромка по альфе и уборка полупрозрачной пыли
     alpha = im.getchannel("A")
     if feather:
         alpha = alpha.filter(ImageFilter.GaussianBlur(feather))
-        im.putalpha(alpha)
+    alpha = alpha.point(lambda v: 0 if v < 12 else v)
+    im.putalpha(alpha)
 
     # 4) обрезка по содержимому
     bbox = im.getbbox()
@@ -56,6 +62,23 @@ def cutout(src, dst, tol=78, pad=8, target_h=None, despill=0.9, feather=0.8, ver
     if verbose:
         print(f"{os.path.basename(dst)}: {im.size[0]}×{im.size[1]}, "
               f"{im.width*im.height/1024:.0f} КБ пикселей")
+    return im
+
+
+def key_out(im, kill=30, ramp=6, span=24):
+    """Убирает остатки пурпурного фона, до которых не достал заливка:
+    пиксели, где пурпур заметно доминирует над зелёным, становятся прозрачными."""
+    r, g, b, a = im.split()
+    m = ImageChops.subtract(ImageChops.darker(r, b), g)  # «пурпурность» 0..255
+    lut = []
+    for v in range(256):
+        if v > kill:
+            lut.append(0)
+        elif v > ramp:
+            lut.append(int(255 * (1.0 - (v - ramp) / float(span))))
+        else:
+            lut.append(255)
+    im.putalpha(ImageChops.multiply(a, m.point(lut)))
     return im
 
 

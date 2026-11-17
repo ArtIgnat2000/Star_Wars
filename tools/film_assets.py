@@ -17,15 +17,17 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 from cutout import cutout  # noqa: E402
 
 
-def alpha_bbox(im):
-    return im.getbbox()
+def solid_bbox(im, thr=110):
+    """bbox по плотному силуэту: полупрозрачные орехи не считаются фигурой."""
+    mask = im.getchannel("A").point(lambda v: 255 if v > thr else 0)
+    return mask.getbbox() or im.getbbox()
 
 
 def feet_anchor(im):
     """Возвращает (x центра стоп, y подошвы) по нижней полосе силуэта."""
     a = im.getchannel("A")
     w, h = im.size
-    bbox = a.getbbox()
+    bbox = solid_bbox(im)
     if not bbox:
         return w // 2, h
     l, t, r, b = bbox
@@ -50,13 +52,13 @@ def build_character(slug, files, fig_h=430):
     # единый масштаб: высота силуэта у всех поз одинаковая
     scaled = []
     for im, fx, fy in cut:
-        l, t, r, b = im.getbbox()
+        l, t, r, b = solid_bbox(im)
         k = fig_h / float(b - t)
         im2 = im.resize((max(1, int(im.width * k)), max(1, int(im.height * k))), Image.LANCZOS)
         scaled.append((im2, fx * k, fy * k))
     half = 0
     for im, fx, fy in scaled:
-        l, t, r, b = im.getbbox()
+        l, t, r, b = solid_bbox(im)
         half = max(half, fx - l, r - fx)
     W = int(half * 2) + 24
     H = int(max(im.height for im, _, _ in scaled)) + 16
@@ -177,9 +179,19 @@ def main():
                                                            "droid-fighter-1.png"), FILM)}]})
 
     # ---------------- фоны ----------------
-    if os.path.exists(os.path.join(RAW, "bd-space.png")):
-        p = backdrop(os.path.join(RAW, "bd-space.png"), os.path.join(FILM, "backdrops", "space.png"))
-        manifest["backdrops"].append({"slug": "space", "name": "Космос", "file": os.path.relpath(p, FILM)})
+    scenes = [
+        ("space", "Космос", "bd-space.png", {}),
+        ("naboo", "Посадка на Набу", "bd-naboo.png", {"darken": 0.97}),
+        ("generator", "Генераторная", "bd-generator.png", {"darken": 0.92}),
+        ("victory", "Победа", "bd-victory.png", {"darken": 0.95}),
+    ]
+    for slug, name, raw, kw in scenes:
+        src = os.path.join(RAW, raw)
+        if not os.path.exists(src):
+            continue
+        p = backdrop(src, os.path.join(FILM, "backdrops", f"{slug}.png"), **kw)
+        manifest["backdrops"].append({"slug": slug, "name": name,
+                                      "file": os.path.relpath(p, FILM)})
 
     with open(os.path.join(FILM, "manifest.json"), "w", encoding="utf-8") as fh:
         json.dump(manifest, fh, ensure_ascii=False, indent=1)

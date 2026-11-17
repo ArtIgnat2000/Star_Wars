@@ -3,8 +3,8 @@
   {
    "slug": "quigon",
    "name": "Квай-Гон",
-   "w": 707,
-   "h": 455,
+   "w": 705,
+   "h": 457,
    "costumes": [
     {
      "name": "стойка",
@@ -19,8 +19,8 @@
   {
    "slug": "obiwan",
    "name": "Оби-Ван",
-   "w": 887,
-   "h": 455,
+   "w": 883,
+   "h": 457,
    "costumes": [
     {
      "name": "стойка",
@@ -35,19 +35,23 @@
   {
    "slug": "maul",
    "name": "Дарт Мол",
-   "w": 1015,
-   "h": 455,
+   "w": 787,
+   "h": 457,
    "costumes": [
     {
      "name": "стойка",
      "file": "sprites/maul/maul-1.png"
+    },
+    {
+     "name": "атака",
+     "file": "sprites/maul/maul-2.png"
     }
    ]
   },
   {
    "slug": "naboo-fighter",
    "name": "Истребитель",
-   "w": 296,
+   "w": 304,
    "h": 300,
    "costumes": [
     {
@@ -67,12 +71,36 @@
   {
    "slug": "droid-fighter",
    "name": "Дроид-истребитель",
-   "w": 476,
+   "w": 494,
    "h": 260,
    "costumes": [
     {
      "name": "крылья-открыты",
      "file": "sprites/droid-fighter/droid-fighter-1.png"
+    }
+   ]
+  },
+  {
+   "slug": "explosion",
+   "name": "Взрыв",
+   "w": 170,
+   "h": 170,
+   "costumes": [
+    {
+     "name": "кадр-1",
+     "file": "sprites/explosion/explosion-1.png"
+    },
+    {
+     "name": "кадр-2",
+     "file": "sprites/explosion/explosion-2.png"
+    },
+    {
+     "name": "кадр-3",
+     "file": "sprites/explosion/explosion-3.png"
+    },
+    {
+     "name": "кадр-4",
+     "file": "sprites/explosion/explosion-4.png"
     }
    ]
   }
@@ -87,6 +115,21 @@
    "slug": "space",
    "name": "Космос",
    "file": "backdrops/space.png"
+  },
+  {
+   "slug": "naboo",
+   "name": "Посадка на Набу",
+   "file": "backdrops/naboo.png"
+  },
+  {
+   "slug": "generator",
+   "name": "Генераторная",
+   "file": "backdrops/generator.png"
+  },
+  {
+   "slug": "victory",
+   "name": "Победа",
+   "file": "backdrops/victory.png"
   }
  ]
 }

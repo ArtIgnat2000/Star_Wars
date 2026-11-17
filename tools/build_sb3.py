@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Кинематографичная версия проекта Scratch 3.0 -> star_wars_duel.sb3
-Спрайты персонажей и кораблей — фотореалистичные PNG (assets/film),
-эффекты и часть фонов пока векторные (assets/...).
+Все персонажи, корабли и фоны — фотореалистичные PNG (assets/film),
+эффекты (лазеры, взрыв, искры, плазма-врата) — вектор из assets/.
 """
 import json
 import os
@@ -56,11 +56,18 @@ def atk(slug):
 
 # ============================================================== СЦЕНА ======
 stage = Target("Stage", is_stage=True, prefix="st")
-backdrops = [("Титул", os.path.join(FILM, FB["title"]["file"])),
-             ("Космос", os.path.join(FILM, FB["space"]["file"])),
-             ("Посадка на Набу", os.path.join(ASSETS, VB["03-naboo"]["file"])),
-             ("Генераторная", os.path.join(ASSETS, VB["04-generator"]["file"])),
-             ("Победа", os.path.join(ASSETS, VB["05-victory"]["file"]))]
+def _bd(film_slug, vec_slug):
+    """Кинематографичный фон, если он уже сгенерирован, иначе векторный."""
+    if film_slug in FB:
+        return os.path.join(FILM, FB[film_slug]["file"])
+    return os.path.join(ASSETS, VB[vec_slug]["file"])
+
+
+backdrops = [("Титул", _bd("title", "01-title")),
+             ("Космос", _bd("space", "02-space")),
+             ("Посадка на Набу", _bd("naboo", "03-naboo")),
+             ("Генераторная", _bd("generator", "04-generator")),
+             ("Победа", _bd("victory", "05-victory"))]
 for name, path in backdrops:
     if path.endswith(".svg"):
         data = open(path, "rb").read()
@@ -105,6 +112,8 @@ stage.script(40, 620,
              setvar("жизни", num(3)),
              setvar("хп_мол", num(3)),
              setvar("этап", num(2)),
+             backdrop("Посадка на Набу"),
+             wait(1.6),
              backdrop("Генераторная"),
              n("data_showvariable", fields={"VARIABLE": ["хп_мол", VARS["хп_мол"]]}),
              wait(0.4),
@@ -301,13 +310,18 @@ targets.append(dr)
 
 # =============================================================== ВЗРЫВ ======
 ex = Target("Взрыв", prefix="ex")
-add_vec_costumes(ex, "explosion")
+if "explosion" in FS:                  # кинематографичный взрыв (кадры на чёрном -> альфа)
+    add_film_costumes(ex, "explosion")
+    EX_SIZE = 42
+else:
+    add_vec_costumes(ex, "explosion")
+    EX_SIZE = 55
 ex.visible = False
 ex.script(40, 40, when_flag(), hide())
 ex.script(40, 160,
           when_clone(),
           gotoxy(V("спавн_x"), V("спавн_y")),
-          setsize(55),
+          setsize(EX_SIZE),
           switch_costume("кадр-1"),
           goto_front(),
           show(),
