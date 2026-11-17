@@ -479,6 +479,7 @@ ml.add_sound("удар-меча", "удар-меча.wav")
 ml.add_sound("гудение-меча", "гудение-меча.wav")
 ml.visible = False
 ml.x, ml.y, ml.size, ml.rotation_style = 120, CHAR_Y, CHAR_SIZE, "left-right"
+ml.direction = -90            # костюмы нарисованы лицом вправо — отражаем к герою
 ml.script(40, 40, when_flag(), hide())
 ml.script(40, 160, when_recv("старт"), hide())
 

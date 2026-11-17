@@ -7,12 +7,14 @@
 Правила, которые видит ребёнок:
   1. На титуле выбираешь героя: Квай-Гон или Оби-Ван (← →, ПРОБЕЛ).
   2. ПРОБЕЛ — удар мечом (герой встаёт в позу «атака»).
-  3. ↓ — блок (герой встаёт в позу «блок»), удар Мола не отнимает жизнь.
-  4. У каждого 3 жизни. Кто первый теряет все — проиграл.
+  3. ↓ — блок (поза «блок»), удар Мола не отнимает жизнь.
+  4. У героя 3 жизни, у Мола 4; Мол бьёт сериями по два удара и иногда
+     успевает закрыться — тогда твой удар только высекает искры.
 
 Скрипты нарочно короткие: одна петля «повторять пока игра = 1» на персонажа,
-никаких списков, клонов и вложенных условий.
+никаких списков и клонов.
 """
+import hashlib
 import json
 import os
 import sys
@@ -33,19 +35,21 @@ VARS = {
     "хп_героя": "v-hp-hero",
     "хп_мола": "v-hp-maul",
     "блок": "v-block",          # 1, пока герой держит ↓
-    "мол_бьёт": "v-maulatk",    # 1, пока Мол замахивается
+    "мол_бьёт": "v-maulatk",    # 1, пока Мол рубит
+    "мол_закрыт": "v-maulguard",  # 1, пока Мол закрылся и парирует
+    "ранен": "v-hurt",          # 1, пока герой в позе «ранен»
     "игра": "v-run",            # 1, пока идёт бой
 }
 ALL_VARS = {vid: [name, 0] for name, vid in VARS.items()}
 ALL_VARS[VARS["выбор"]][1] = 1
 ALL_VARS[VARS["хп_героя"]][1] = 3
-ALL_VARS[VARS["хп_мола"]][1] = 3
+ALL_VARS[VARS["хп_мола"]][1] = 4
 
 BC = {"выбор": "b-choice", "бой": "b-fight", "победа": "b-win",
-      "поражение": "b-lose", "искры": "b-sparks"}
+      "поражение": "b-lose", "искры": "b-sparks", "вспышка": "b-flash",
+      "кольцо": "b-ring"}
 ALL_BC = {bid: name for name, bid in BC.items()}
 
-# подменяем таблицы в библиотеке — дальше все помощники работают с lite-именами
 sb3lib.VARS, sb3lib.BC = VARS, BC
 sb3lib.ALL_VARS, sb3lib.ALL_BC = ALL_VARS, ALL_BC
 
@@ -55,25 +59,25 @@ BD = {b["slug"]: b for b in MAN["backdrops"]}
 VEC = {s["slug"]: s for s in
        json.load(open(os.path.join(ASSETS, "manifest.json"), encoding="utf-8"))["sprites"]}
 
-HERO_X, MAUL_X, CHAR_Y = -110, 130, -40
-TITLE_Y = -10          # на титуле герои стоят чуть выше, под подписями
+HERO_X, MAUL_X = -110, 130
+DUEL_Y = -115          # центр вращения костюма — стопы, поэтому y = уровень пола
+TITLE_Y = -68
 DUEL_SIZE, TITLE_SIZE = 37, 31
-import hashlib
+HERO_HP, MAUL_HP = 3, 4
 
 
-def add_png(t, rel, name, w, h):
+def add_png(t, rel, name, w, h, cx, cy):
     data = open(os.path.join(ROOT, rel), "rb").read()
     md5 = hashlib.md5(data).hexdigest()
     t.costumes.append({"assetId": md5, "name": name, "bitmapResolution": 1,
                        "md5ext": md5 + ".png", "dataFormat": "png",
-                       "rotationCenterX": w / 2, "rotationCenterY": h / 2,
-                       "_data": data})
+                       "rotationCenterX": cx, "rotationCenterY": cy, "_data": data})
 
 
-def lite_cosutumes(t, slug):
+def lite_costumes(t, slug):
     s = SP[slug]
     for c in s["costumes"]:
-        add_png(t, c["file"], c["name"], s["w"], s["h"])
+        add_png(t, c["file"], c["name"], c["w"], c["h"], c["cx"], c["cy"])
 
 
 targets = []
@@ -103,15 +107,17 @@ st.script(40, 40,
           backdrop("Выбор героя"),
           bcast("выбор"))
 
-# выбор героя: ← → и старт по ПРОБЕЛу
 st.script(40, 220,
           when_recv("выбор"),
-          setvar("хп_героя", num(3)),
-          setvar("хп_мола", num(3)),
+          setvar("хп_героя", num(HERO_HP)),
+          setvar("хп_мола", num(MAUL_HP)),
           setvar("игра", num(0)),
+          setvar("ранен", num(0)),
+          setvar("блок", num(0)),
+          setvar("мол_закрыт", num(0)),
           backdrop("Выбор героя"),
           *HIDE_HP,
-          wait_until(NOT(keyp("space"))),   # не начинаем бой с зажатой клавиши
+          wait_until(NOT(keyp("space"))),
           repeat_until(eq(V("игра"), num(1)),
                        if_(keyp("left arrow"), setvar("выбор", num(1))),
                        if_(keyp("right arrow"), setvar("выбор", num(2))),
@@ -121,8 +127,7 @@ st.script(40, 220,
                            bcast("бой")),
                        wait(0.03)))
 
-# конец боя
-st.script(40, 520,
+st.script(40, 560,
           when_recv("победа"),
           wait(0.8),
           backdrop("Победа"),
@@ -133,7 +138,7 @@ st.script(40, 520,
           wait(0.3),
           bcast("выбор"))
 
-st.script(40, 760,
+st.script(40, 800,
           when_recv("поражение"),
           wait(0.4),
           backdrop("Поражение"),
@@ -144,16 +149,14 @@ st.script(40, 760,
           wait(0.3),
           bcast("выбор"))
 
-st.script(40, 1000, when_recv("бой"), *SHOW_HP)
+st.script(40, 1040, when_recv("бой"), *SHOW_HP)
 targets.append(st)
 
 # ================================================================ ГЕРОИ =====
-# один и тот же короткий набор скриптов для Квай-Гона (1) и Оби-Вана (2)
-for slug, name, prefix, number, title_x, sound in (
-        ("quigon", "Квай-Гон", "qg", 1, -110, "меч-вкл"),
-        ("obiwan", "Оби-Ван", "ob", 2, 110, "меч-вкл")):
+for slug, name, prefix, number, title_x in (("quigon", "Квай-Гон", "qg", 1, -110),
+                                            ("obiwan", "Оби-Ван", "ob", 2, 110)):
     t = Target(name, prefix=prefix)
-    lite_cosutumes(t, slug)
+    lite_costumes(t, slug)
     t.add_sound("меч-вкл", "меч-вкл.wav")
     t.add_sound("удар-меча", "удар-меча.wav")
     t.visible = False
@@ -167,92 +170,116 @@ for slug, name, prefix, number, title_x, sound in (
              switch_costume("стойка"),
              show())
 
-    # сам бой
+    # бой
     t.script(40, 320,
              when_recv("бой"),
              if_(eq(V("выбор"), num(number)),
-                 gotoxy(num(HERO_X), num(CHAR_Y)),
+                 gotoxy(num(HERO_X), num(DUEL_Y)),
                  setsize(DUEL_SIZE),
                  switch_costume("стойка"),
                  play("меч-вкл"),
                  repeat_until(eq(V("игра"), num(0)),
+                              # получил удар — на мгновение поза «ранен»
+                              if_(eq(V("ранен"), num(1)),
+                                  switch_costume("ранен"),
+                                  wait(0.30),
+                                  setvar("ранен", num(0)),
+                                  switch_costume("стойка")),
+                              # держим ↓ — блок
                               if_(keyp("down arrow"),
                                   setvar("блок", num(1)),
                                   switch_costume("блок")),
+                              # ПРОБЕЛ — удар; если Мол закрылся, будет парирование
                               if_(AND(keyp("space"), eq(V("блок"), num(0))),
                                   switch_costume("атака"),
                                   wait(0.10),
+                                  bcast("вспышка"),
                                   play("удар-меча"),
-                                  bcast("искры"),
-                                  changevar("хп_мола", num(-1)),
-                                  wait(0.30)),
+                                  if_else(eq(V("мол_закрыт"), num(1)),
+                                          [bcast("искры")],
+                                          [if_(gt(V("хп_мола"), num(0)),
+                                               changevar("хп_мола", num(-1))),
+                                           bcast("искры")]),
+                                  wait(0.25)),
                               if_(AND(NOT(keyp("down arrow")), NOT(keyp("space"))),
                                   setvar("блок", num(0)),
                                   switch_costume("стойка")),
-                              wait(0.03))))
+                              wait(0.02))))
 
     # финал
-    t.script(40, 760,
+    t.script(40, 800,
              when_recv("победа"),
+             wait(0.06),
              if_(eq(V("выбор"), num(number)),
-                 switch_costume("стойка"),
                  setvar("блок", num(0)),
+                 switch_costume("победа"),
                  say("Мы победили!", 2.5)))
 
-    t.script(40, 920,
+    t.script(40, 960,
              when_recv("поражение"),
+             wait(0.06),
              if_(eq(V("выбор"), num(number)),
-                 switch_costume("стойка"),
                  setvar("блок", num(0)),
+                 switch_costume("ранен"),
                  say("Он слишком силён…", 2.5)))
     targets.append(t)
 
 # ============================================================ ДАРТ МОЛ ======
 ml = Target("Дарт Мол", prefix="ml")
-lite_cosutumes(ml, "maul")
+lite_costumes(ml, "maul")
 ml.add_sound("гудение-меча", "гудение-меча.wav")
 ml.add_sound("удар-меча", "удар-меча.wav")
 ml.visible = False
+ml.direction = -90              # костюмы нарисованы лицом вправо — отражаем к герою
+ml.rotation_style = "left-right"
 ml.script(40, 40, when_flag(), hide())
 ml.script(40, 160, when_recv("выбор"), hide())
 
 ml.script(40, 300,
           when_recv("бой"),
-          gotoxy(num(MAUL_X), num(CHAR_Y)),
+          gotoxy(num(MAUL_X), num(DUEL_Y)),
           setsize(DUEL_SIZE),
           switch_costume("стойка"),
           show(),
           play("гудение-меча"),
           repeat_until(eq(V("игра"), num(0)),
-                       # закрылся, потом замахнулся — удар
-                       switch_costume("блок"),
-                       wait(0.9),
-                       switch_costume("атака"),
-                       setvar("мол_бьёт", num(1)),
+                       # серия из двух ударов: перед каждым короткая стойка-закрытие
+                       repeat(2,
+                              switch_costume("блок"),
+                              setvar("мол_закрыт", num(1)),
+                              wait(0.55),
+                              setvar("мол_закрыт", num(0)),
+                              switch_costume("атака"),
+                              setvar("мол_бьёт", num(1)),
+                              wait(0.20),
+                              if_else(eq(V("блок"), num(0)),
+                                      [if_(gt(V("хп_героя"), num(0)),
+                                           changevar("хп_героя", num(-1))),
+                                       setvar("ранен", num(1)),
+                                       bcast("вспышка"),
+                                       play("удар-меча")],
+                                      [bcast("кольцо"), bcast("искры")]),
+                              wait(0.18),
+                              switch_costume("стойка"),
+                              setvar("мол_бьёт", num(0)),
+                              wait(0.30)),
                        wait(0.25),
-                       bcast("искры"),
-                       play("удар-меча"),
-                       if_(eq(V("блок"), num(0)), changevar("хп_героя", num(-1))),
-                       wait(0.25),
-                       switch_costume("стойка"),
-                       setvar("мол_бьёт", num(0)),
-                       wait(0.5),
-                       # проверяем, не кончился ли бой
-                       if_(lt(V("хп_героя"), num(1)),
-                           setvar("игра", num(0)),
-                           bcast("поражение")),
+                       # проверяем, не кончился ли бой (при «ничьей» побеждает герой)
                        if_(lt(V("хп_мола"), num(1)),
                            setvar("игра", num(0)),
-                           bcast("победа"))))
+                           bcast("победа")),
+                       if_(lt(V("хп_героя"), num(1)),
+                           setvar("игра", num(0)),
+                           bcast("поражение"))))
 
-ml.script(40, 900,
+ml.script(40, 940,
           when_recv("победа"),
-          wait(0.5),
-          switch_costume("стойка"),
+          wait(0.4),
+          switch_costume("ранен"),
           repeat(10, ghost(num(10))),
           hide())
 
-ml.script(40, 1080,
+ml.script(40, 1120,
           when_recv("поражение"),
           switch_costume("стойка"),
           say("Ха-ха-ха!", 2.5))
@@ -260,7 +287,7 @@ targets.append(ml)
 
 # ============================================================== СТРЕЛКА =====
 ar = Target("Стрелка", prefix="ar")
-lite_cosutumes(ar, "arrow")
+lite_costumes(ar, "arrow")
 ar.visible = False
 ar.script(40, 40, when_flag(), hide())
 ar.script(40, 160,
@@ -279,7 +306,6 @@ targets.append(ar)
 sp = Target("Искры", prefix="sp")
 for c in VEC["sparks"]["costumes"]:
     sp.add_costume(c["name"], c["file"], c["w"], c["h"])
-sp.add_sound("гудение-меча", "гудение-меча.wav")
 sp.visible = False
 sp.script(40, 40, when_flag(), hide())
 sp.script(40, 160,
@@ -295,11 +321,49 @@ sp.script(40, 160,
           hide())
 targets.append(sp)
 
+# ============================================================== ВСПЫШКА ====
+fl = Target("Вспышка", prefix="fl")
+lite_costumes(fl, "flash")
+fl.visible = False
+fl.script(40, 40, when_flag(), hide())
+fl.script(40, 160,
+          when_recv("вспышка"),
+          gotoxy(num(10), num(-10)),
+          setsize(55),
+          switch_costume("1"),
+          goto_front(),
+          show(),
+          wait(0.05),
+          switch_costume("2"),
+          wait(0.05),
+          switch_costume("3"),
+          wait(0.06),
+          hide())
+targets.append(fl)
+
+# ================================================================ КОЛЬЦО ===
+rg = Target("Кольцо", prefix="rg")
+lite_costumes(rg, "ring")
+rg.visible = False
+rg.script(40, 40, when_flag(), hide())
+rg.script(40, 160,
+          when_recv("кольцо"),
+          gotoxy(num(20), num(DUEL_Y + 85)),
+          setsize(45),
+          switch_costume("1"),
+          goto_front(),
+          show(),
+          wait(0.06),
+          switch_costume("2"),
+          wait(0.08),
+          hide())
+targets.append(rg)
+
 # ============================================================= мониторы =====
 MON = []
 for name, x, y, vis in (("хп_героя", -150, 150, False), ("хп_мола", 40, 150, False)):
     MON.append({"id": VARS[name], "mode": "default", "opcode": "data_variable",
-                "params": {"VARIABLE": name}, "spriteName": None, "value": 3,
+                "params": {"VARIABLE": name}, "spriteName": None, "value": HERO_HP,
                 "width": 0, "height": 0, "x": x, "y": y, "visible": vis,
                 "sliderMin": 0, "sliderMax": 100, "isDiscrete": True})
 

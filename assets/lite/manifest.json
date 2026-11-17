@@ -8,15 +8,43 @@
    "costumes": [
     {
      "name": "стойка",
-     "file": "assets/film/sprites/quigon/quigon-1.png"
+     "file": "assets/film/sprites/quigon/quigon-1.png",
+     "w": 705,
+     "h": 457,
+     "cx": 352,
+     "cy": 449
     },
     {
      "name": "атака",
-     "file": "assets/film/sprites/quigon/quigon-2.png"
+     "file": "assets/film/sprites/quigon/quigon-2.png",
+     "w": 705,
+     "h": 457,
+     "cx": 352,
+     "cy": 448
     },
     {
      "name": "блок",
-     "file": "assets/lite/sprites/quigon/quigon-block.png"
+     "file": "assets/lite/sprites/quigon/quigon_block.png",
+     "w": 267,
+     "h": 446,
+     "cx": 90,
+     "cy": 437
+    },
+    {
+     "name": "ранен",
+     "file": "assets/lite/sprites/quigon/quigon_hurt.png",
+     "w": 413,
+     "h": 445,
+     "cx": 265,
+     "cy": 436
+    },
+    {
+     "name": "победа",
+     "file": "assets/lite/sprites/quigon/quigon_win.png",
+     "w": 200,
+     "h": 593,
+     "cx": 123,
+     "cy": 584
     }
    ]
   },
@@ -28,15 +56,43 @@
    "costumes": [
     {
      "name": "стойка",
-     "file": "assets/film/sprites/obiwan/obiwan-1.png"
+     "file": "assets/film/sprites/obiwan/obiwan-1.png",
+     "w": 883,
+     "h": 457,
+     "cx": 441,
+     "cy": 448
     },
     {
      "name": "атака",
-     "file": "assets/film/sprites/obiwan/obiwan-2.png"
+     "file": "assets/film/sprites/obiwan/obiwan-2.png",
+     "w": 883,
+     "h": 457,
+     "cx": 441,
+     "cy": 448
     },
     {
      "name": "блок",
-     "file": "assets/lite/sprites/obiwan/obiwan-block.png"
+     "file": "assets/lite/sprites/obiwan/obiwan_block.png",
+     "w": 295,
+     "h": 447,
+     "cx": 102,
+     "cy": 438
+    },
+    {
+     "name": "ранен",
+     "file": "assets/lite/sprites/obiwan/obiwan_hurt.png",
+     "w": 600,
+     "h": 448,
+     "cx": 430,
+     "cy": 439
+    },
+    {
+     "name": "победа",
+     "file": "assets/lite/sprites/obiwan/obiwan_win.png",
+     "w": 255,
+     "h": 593,
+     "cx": 115,
+     "cy": 584
     }
    ]
   },
@@ -48,15 +104,35 @@
    "costumes": [
     {
      "name": "стойка",
-     "file": "assets/film/sprites/maul/maul-1.png"
+     "file": "assets/film/sprites/maul/maul-1.png",
+     "w": 787,
+     "h": 457,
+     "cx": 395,
+     "cy": 448
     },
     {
      "name": "атака",
-     "file": "assets/film/sprites/maul/maul-2.png"
+     "file": "assets/film/sprites/maul/maul-2.png",
+     "w": 787,
+     "h": 457,
+     "cx": 392,
+     "cy": 449
     },
     {
      "name": "блок",
-     "file": "assets/lite/sprites/maul/maul-block.png"
+     "file": "assets/lite/sprites/maul/maul_block.png",
+     "w": 590,
+     "h": 441,
+     "cx": 329,
+     "cy": 432
+    },
+    {
+     "name": "ранен",
+     "file": "assets/lite/sprites/maul/maul_hurt.png",
+     "w": 375,
+     "h": 445,
+     "cx": 134,
+     "cy": 436
     }
    ]
   },
@@ -68,7 +144,67 @@
    "costumes": [
     {
      "name": "стрелка",
-     "file": "assets/lite/sprites/arrow/arrow-1.png"
+     "file": "assets/lite/sprites/arrow/arrow-1.png",
+     "w": 64,
+     "h": 64,
+     "cx": 32.0,
+     "cy": 32.0
+    }
+   ]
+  },
+  {
+   "slug": "flash",
+   "name": "Вспышка",
+   "w": 160,
+   "h": 160,
+   "costumes": [
+    {
+     "name": "1",
+     "file": "assets/lite/sprites/flash/flash-1.png",
+     "w": 160,
+     "h": 160,
+     "cx": 80,
+     "cy": 80
+    },
+    {
+     "name": "2",
+     "file": "assets/lite/sprites/flash/flash-2.png",
+     "w": 160,
+     "h": 160,
+     "cx": 80,
+     "cy": 80
+    },
+    {
+     "name": "3",
+     "file": "assets/lite/sprites/flash/flash-3.png",
+     "w": 160,
+     "h": 160,
+     "cx": 80,
+     "cy": 80
+    }
+   ]
+  },
+  {
+   "slug": "ring",
+   "name": "Кольцо",
+   "w": 160,
+   "h": 160,
+   "costumes": [
+    {
+     "name": "1",
+     "file": "assets/lite/sprites/ring/ring-1.png",
+     "w": 160,
+     "h": 160,
+     "cx": 80,
+     "cy": 80
+    },
+    {
+     "name": "2",
+     "file": "assets/lite/sprites/ring/ring-2.png",
+     "w": 160,
+     "h": 160,
+     "cx": 80,
+     "cy": 80
     }
    ]
   }
