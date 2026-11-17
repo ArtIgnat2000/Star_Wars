@@ -1,0 +1,98 @@
+{
+ "sprites": [
+  {
+   "slug": "quigon",
+   "name": "Квай-Гон",
+   "w": 705,
+   "h": 457,
+   "costumes": [
+    {
+     "name": "стойка",
+     "file": "assets/film/sprites/quigon/quigon-1.png"
+    },
+    {
+     "name": "атака",
+     "file": "assets/film/sprites/quigon/quigon-2.png"
+    },
+    {
+     "name": "блок",
+     "file": "assets/lite/sprites/quigon/quigon-block.png"
+    }
+   ]
+  },
+  {
+   "slug": "obiwan",
+   "name": "Оби-Ван",
+   "w": 883,
+   "h": 457,
+   "costumes": [
+    {
+     "name": "стойка",
+     "file": "assets/film/sprites/obiwan/obiwan-1.png"
+    },
+    {
+     "name": "атака",
+     "file": "assets/film/sprites/obiwan/obiwan-2.png"
+    },
+    {
+     "name": "блок",
+     "file": "assets/lite/sprites/obiwan/obiwan-block.png"
+    }
+   ]
+  },
+  {
+   "slug": "maul",
+   "name": "Дарт Мол",
+   "w": 787,
+   "h": 457,
+   "costumes": [
+    {
+     "name": "стойка",
+     "file": "assets/film/sprites/maul/maul-1.png"
+    },
+    {
+     "name": "атака",
+     "file": "assets/film/sprites/maul/maul-2.png"
+    },
+    {
+     "name": "блок",
+     "file": "assets/lite/sprites/maul/maul-block.png"
+    }
+   ]
+  },
+  {
+   "slug": "arrow",
+   "name": "Стрелка",
+   "w": 64,
+   "h": 64,
+   "costumes": [
+    {
+     "name": "стрелка",
+     "file": "assets/lite/sprites/arrow/arrow-1.png"
+    }
+   ]
+  }
+ ],
+ "backdrops": [
+  {
+   "slug": "choice",
+   "name": "Выбор героя",
+   "file": "assets/lite/backdrops/choice.png"
+  },
+  {
+   "slug": "duel",
+   "name": "Дуэль",
+   "file": "assets/lite/backdrops/duel.png"
+  },
+  {
+   "slug": "win",
+   "name": "Победа",
+   "file": "assets/lite/backdrops/win.png"
+  },
+  {
+   "slug": "lose",
+   "name": "Поражение",
+   "file": "assets/lite/backdrops/lose.png"
+  }
+ ]
+}
