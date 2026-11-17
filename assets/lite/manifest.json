@@ -15,6 +15,30 @@
      "cy": 449
     },
     {
+     "name": "шаг-1",
+     "file": "assets/lite/sprites/quigon/quigon_шаг-1.png",
+     "w": 365,
+     "h": 445,
+     "cx": 299,
+     "cy": 436
+    },
+    {
+     "name": "шаг-2",
+     "file": "assets/lite/sprites/quigon/quigon_шаг-2.png",
+     "w": 368,
+     "h": 447,
+     "cx": 195,
+     "cy": 438
+    },
+    {
+     "name": "замах",
+     "file": "assets/lite/sprites/quigon/quigon_замах.png",
+     "w": 336,
+     "h": 445,
+     "cx": 109,
+     "cy": 436
+    },
+    {
      "name": "атака",
      "file": "assets/film/sprites/quigon/quigon-2.png",
      "w": 705,
@@ -23,8 +47,32 @@
      "cy": 448
     },
     {
+     "name": "переход-1",
+     "file": "assets/lite/sprites/quigon/quigon_переход-1.png",
+     "w": 725,
+     "h": 477,
+     "cx": 362,
+     "cy": 467
+    },
+    {
+     "name": "переход-2",
+     "file": "assets/lite/sprites/quigon/quigon_переход-2.png",
+     "w": 725,
+     "h": 477,
+     "cx": 362,
+     "cy": 467
+    },
+    {
+     "name": "переход-3",
+     "file": "assets/lite/sprites/quigon/quigon_переход-3.png",
+     "w": 725,
+     "h": 477,
+     "cx": 362,
+     "cy": 467
+    },
+    {
      "name": "блок",
-     "file": "assets/lite/sprites/quigon/quigon_block.png",
+     "file": "assets/lite/sprites/quigon/quigon_блок.png",
      "w": 267,
      "h": 446,
      "cx": 90,
@@ -32,7 +80,7 @@
     },
     {
      "name": "ранен",
-     "file": "assets/lite/sprites/quigon/quigon_hurt.png",
+     "file": "assets/lite/sprites/quigon/quigon_ранен.png",
      "w": 413,
      "h": 445,
      "cx": 265,
@@ -40,7 +88,7 @@
     },
     {
      "name": "победа",
-     "file": "assets/lite/sprites/quigon/quigon_win.png",
+     "file": "assets/lite/sprites/quigon/quigon_победа.png",
      "w": 200,
      "h": 593,
      "cx": 123,
@@ -63,6 +111,30 @@
      "cy": 448
     },
     {
+     "name": "шаг-1",
+     "file": "assets/lite/sprites/obiwan/obiwan_шаг-1.png",
+     "w": 328,
+     "h": 446,
+     "cx": 257,
+     "cy": 437
+    },
+    {
+     "name": "шаг-2",
+     "file": "assets/lite/sprites/obiwan/obiwan_шаг-2.png",
+     "w": 325,
+     "h": 443,
+     "cx": 254,
+     "cy": 434
+    },
+    {
+     "name": "замах",
+     "file": "assets/lite/sprites/obiwan/obiwan_замах.png",
+     "w": 903,
+     "h": 477,
+     "cx": 457,
+     "cy": 467
+    },
+    {
      "name": "атака",
      "file": "assets/film/sprites/obiwan/obiwan-2.png",
      "w": 883,
@@ -71,8 +143,32 @@
      "cy": 448
     },
     {
+     "name": "переход-1",
+     "file": "assets/lite/sprites/obiwan/obiwan_переход-1.png",
+     "w": 923,
+     "h": 497,
+     "cx": 461,
+     "cy": 487
+    },
+    {
+     "name": "переход-2",
+     "file": "assets/lite/sprites/obiwan/obiwan_переход-2.png",
+     "w": 923,
+     "h": 497,
+     "cx": 461,
+     "cy": 487
+    },
+    {
+     "name": "переход-3",
+     "file": "assets/lite/sprites/obiwan/obiwan_переход-3.png",
+     "w": 903,
+     "h": 477,
+     "cx": 451,
+     "cy": 467
+    },
+    {
      "name": "блок",
-     "file": "assets/lite/sprites/obiwan/obiwan_block.png",
+     "file": "assets/lite/sprites/obiwan/obiwan_блок.png",
      "w": 295,
      "h": 447,
      "cx": 102,
@@ -80,7 +176,7 @@
     },
     {
      "name": "ранен",
-     "file": "assets/lite/sprites/obiwan/obiwan_hurt.png",
+     "file": "assets/lite/sprites/obiwan/obiwan_ранен.png",
      "w": 600,
      "h": 448,
      "cx": 430,
@@ -88,7 +184,7 @@
     },
     {
      "name": "победа",
-     "file": "assets/lite/sprites/obiwan/obiwan_win.png",
+     "file": "assets/lite/sprites/obiwan/obiwan_победа.png",
      "w": 255,
      "h": 593,
      "cx": 115,
@@ -111,6 +207,30 @@
      "cy": 448
     },
     {
+     "name": "шаг-1",
+     "file": "assets/lite/sprites/maul/maul_шаг-1.png",
+     "w": 679,
+     "h": 449,
+     "cx": 174,
+     "cy": 441
+    },
+    {
+     "name": "шаг-2",
+     "file": "assets/lite/sprites/maul/maul_шаг-2.png",
+     "w": 689,
+     "h": 439,
+     "cx": 399,
+     "cy": 432
+    },
+    {
+     "name": "замах",
+     "file": "assets/lite/sprites/maul/maul_замах.png",
+     "w": 807,
+     "h": 477,
+     "cx": 399,
+     "cy": 467
+    },
+    {
      "name": "атака",
      "file": "assets/film/sprites/maul/maul-2.png",
      "w": 787,
@@ -119,8 +239,32 @@
      "cy": 449
     },
     {
+     "name": "переход-1",
+     "file": "assets/lite/sprites/maul/maul_переход-1.png",
+     "w": 827,
+     "h": 497,
+     "cx": 413,
+     "cy": 487
+    },
+    {
+     "name": "переход-2",
+     "file": "assets/lite/sprites/maul/maul_переход-2.png",
+     "w": 827,
+     "h": 497,
+     "cx": 413,
+     "cy": 487
+    },
+    {
+     "name": "переход-3",
+     "file": "assets/lite/sprites/maul/maul_переход-3.png",
+     "w": 807,
+     "h": 477,
+     "cx": 403,
+     "cy": 467
+    },
+    {
      "name": "блок",
-     "file": "assets/lite/sprites/maul/maul_block.png",
+     "file": "assets/lite/sprites/maul/maul_блок.png",
      "w": 590,
      "h": 441,
      "cx": 329,
@@ -128,7 +272,7 @@
     },
     {
      "name": "ранен",
-     "file": "assets/lite/sprites/maul/maul_hurt.png",
+     "file": "assets/lite/sprites/maul/maul_ранен.png",
      "w": 375,
      "h": 445,
      "cx": 134,
