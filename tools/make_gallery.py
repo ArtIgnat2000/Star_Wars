@@ -67,6 +67,8 @@ def main():
          "<img class='poster' src='poster.png' alt='Постер набора'>",
          "<div class='dl'><a class='btn' href='/star_wars_duel.sb3' download>",
          "Скачать star_wars_duel.sb3 · 3,0 МБ</a>",
+         "<a class='btn ghost' href='/star_wars_duel_lite.sb3' download>",
+         "Дуэль на мечах (лёгкая) · 2,6 МБ</a>",
          "<a class='btn ghost' href='/star_wars_duel_vector.sb3' download>",
          "Векторная версия · 0,5 МБ</a>",
          "<span class='hint'>Открывается в Scratch 3: Файл → Загрузить с компьютера</span></div>",
@@ -78,6 +80,22 @@ def main():
          "<div class='card'><img src='gameplay-3.png' alt='Посадка на Набу'>"
          "<h3 style='margin-top:10px'>Интерлюдия — посадка на Набу</h3></div>",
          "</div>"]
+
+    # лёгкая версия
+    p.append("""
+<h2>Лёгкая версия — «Дуэль на мечах»</h2>
+<p class='sub'>Только бой на световых мечах, без полётов: выбрать героя (Квай-Гон или Оби-Ван),
+ПРОБЕЛ — удар, ↓ — блок. У каждого персонажа три костюма: стойка, атака, блок.</p>
+<div class='grid'>
+<div class='card'><img src='duel-lite-1.png' alt='Выбор героя'>
+<h3 style='margin-top:10px'>Выбор героя</h3></div>
+<div class='card'><img src='duel-lite-2.png' alt='Дуэль'>
+<h3 style='margin-top:10px'>Дуэль</h3></div>
+</div>
+<div class='dl'><a class='btn' href='/star_wars_duel_lite.sb3' download>
+Скачать star_wars_duel_lite.sb3 · 2,6 МБ</a>
+<span class='hint'>Правила и скрипты — в docs/ДУЭЛЬ_НА_МЕЧАХ.md</span></div>
+""")
 
     # персонажи
     p.append("<h2>Персонажи</h2>")
