@@ -202,6 +202,10 @@ def hide():
     return n("looks_hide")
 
 
+def goto_mouse():
+    return n("motion_gotoxy") if False else n("motion_goto", {"TO": menu("motion_goto_menu", TO=["_mouse_", None])})
+
+
 def goto_front():
     return n("looks_gotofrontback", fields={"FRONT_BACK": ["front", None]})
 
@@ -215,8 +219,17 @@ def play(snd):
     return n("sound_play", {"SOUND_MENU": menu("sound_sounds_menu", SOUND_MENU=[snd, None])})
 
 
+def val(v):
+    """Вход блока: число-литерал или уже собранный блок-репортёр."""
+    if isinstance(v, tuple) and v and v[0] in ("rep", "sub"):
+        return v
+    if isinstance(v, (int, float)):
+        return num(v)
+    return v
+
+
 def wait(t):
-    return n("control_wait", {"DURATION": num(t)})
+    return n("control_wait", {"DURATION": val(t)})
 
 
 def forever(*body):
@@ -224,8 +237,7 @@ def forever(*body):
 
 
 def repeat(times, *body):
-    if isinstance(times, (int, float)):
-        times = num(times)
+    times = val(times)
     flat = []
     for b in body:
         flat.extend(b if isinstance(b, list) else [b])
