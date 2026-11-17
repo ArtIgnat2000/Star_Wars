@@ -40,6 +40,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def end_headers(self):
         self.send_header("Cache-Control", "no-store")
+        # .sb3 и архивы — сразу на скачивание, а не открытием в браузере
+        if self.path.lower().split("?")[0].endswith((".sb3", ".zip")):
+            name = os.path.basename(self.path.split("?")[0])
+            self.send_header("Content-Disposition", f'attachment; filename="{name}"')
         super().end_headers()
 
     def log_message(self, *a):

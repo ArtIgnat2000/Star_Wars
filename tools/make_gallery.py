@@ -42,6 +42,12 @@ table{border-collapse:collapse;width:100%;font-size:15px}
 td,th{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left}
 th{color:var(--dim);font-weight:600}
 .pending{opacity:.62}
+.dl{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:16px 0 4px}
+.btn{display:inline-block;background:var(--gold);color:#1a1405;text-decoration:none;
+ font-weight:700;padding:12px 20px;border-radius:10px;border:1px solid #b8933180}
+.btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line);font-weight:600}
+.btn:hover{filter:brightness(1.08)}
+.hint{color:var(--dim);font-size:14px}
 """
 
 
@@ -59,6 +65,11 @@ def main():
          "и корабли, фоны Набу, эффекты и готовый проект <code>star_wars_duel.sb3</code>. "
          "Есть и полностью векторная версия — <code>star_wars_duel_vector.sb3</code>.</p>",
          "<img class='poster' src='poster.png' alt='Постер набора'>",
+         "<div class='dl'><a class='btn' href='/star_wars_duel.sb3' download>",
+         "Скачать star_wars_duel.sb3 · 3,0 МБ</a>",
+         "<a class='btn ghost' href='/star_wars_duel_vector.sb3' download>",
+         "Векторная версия · 0,5 МБ</a>",
+         "<span class='hint'>Открывается в Scratch 3: Файл → Загрузить с компьютера</span></div>",
          "<h2>Как это выглядит в игре</h2><div class='grid'>",
          "<div class='card'><img src='gameplay-1.png' alt='Уровень 1'>"
          "<h3 style='margin-top:10px'>Уровень 1 — погоня</h3></div>",
