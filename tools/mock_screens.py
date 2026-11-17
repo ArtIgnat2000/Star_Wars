@@ -2,7 +2,7 @@
 """«Скриншоты» уровней из готовых ассетов (кинематографичная версия)."""
 import json
 import os
-from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageEnhance
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps, ImageEnhance
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PREV = os.path.join(ROOT, "preview")
@@ -30,7 +30,9 @@ def vec(slug, idx=0):
     return Image.open(os.path.join(VEC, s["costumes"][idx]["file"])).convert("RGBA")
 
 
-def place(canvas, img, sx, sy, size_percent):
+def place(canvas, img, sx, sy, size_percent, mirror=False):
+    if mirror:
+        img = ImageOps.mirror(img)
     w = img.width * size_percent / 100.0
     h = img.height * size_percent / 100.0
     im = img.resize((max(1, int(w)), max(1, int(h))), Image.LANCZOS)
@@ -95,7 +97,7 @@ def level2():
     c = bg_film("generator")
     place(c, film("obiwan", 1), 5, -40, 37)
     flash(c, 145, 10, 30)
-    place(c, film("maul", 1), 130, -40, 37)
+    place(c, film("maul", 1), 130, -40, 37, mirror=True)
     return label(c, "Уровень 2 · генераторная · Оби-Ван против Мола")
 
 
