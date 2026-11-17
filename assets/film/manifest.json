@@ -1,0 +1,135 @@
+{
+ "sprites": [
+  {
+   "slug": "quigon",
+   "name": "Квай-Гон",
+   "w": 705,
+   "h": 457,
+   "costumes": [
+    {
+     "name": "стойка",
+     "file": "sprites/quigon/quigon-1.png"
+    },
+    {
+     "name": "атака",
+     "file": "sprites/quigon/quigon-2.png"
+    }
+   ]
+  },
+  {
+   "slug": "obiwan",
+   "name": "Оби-Ван",
+   "w": 883,
+   "h": 457,
+   "costumes": [
+    {
+     "name": "стойка",
+     "file": "sprites/obiwan/obiwan-1.png"
+    },
+    {
+     "name": "атака",
+     "file": "sprites/obiwan/obiwan-2.png"
+    }
+   ]
+  },
+  {
+   "slug": "maul",
+   "name": "Дарт Мол",
+   "w": 787,
+   "h": 457,
+   "costumes": [
+    {
+     "name": "стойка",
+     "file": "sprites/maul/maul-1.png"
+    },
+    {
+     "name": "атака",
+     "file": "sprites/maul/maul-2.png"
+    }
+   ]
+  },
+  {
+   "slug": "naboo-fighter",
+   "name": "Истребитель",
+   "w": 304,
+   "h": 300,
+   "costumes": [
+    {
+     "name": "двигатель-1",
+     "file": "sprites/naboo-fighter/naboo-fighter-1.png"
+    },
+    {
+     "name": "двигатель-2",
+     "file": "sprites/naboo-fighter/naboo-fighter-2.png"
+    },
+    {
+     "name": "двигатель-3",
+     "file": "sprites/naboo-fighter/naboo-fighter-3.png"
+    }
+   ]
+  },
+  {
+   "slug": "droid-fighter",
+   "name": "Дроид-истребитель",
+   "w": 494,
+   "h": 260,
+   "costumes": [
+    {
+     "name": "крылья-открыты",
+     "file": "sprites/droid-fighter/droid-fighter-1.png"
+    }
+   ]
+  },
+  {
+   "slug": "explosion",
+   "name": "Взрыв",
+   "w": 170,
+   "h": 170,
+   "costumes": [
+    {
+     "name": "кадр-1",
+     "file": "sprites/explosion/explosion-1.png"
+    },
+    {
+     "name": "кадр-2",
+     "file": "sprites/explosion/explosion-2.png"
+    },
+    {
+     "name": "кадр-3",
+     "file": "sprites/explosion/explosion-3.png"
+    },
+    {
+     "name": "кадр-4",
+     "file": "sprites/explosion/explosion-4.png"
+    }
+   ]
+  }
+ ],
+ "backdrops": [
+  {
+   "slug": "title",
+   "name": "Титул",
+   "file": "backdrops/title.png"
+  },
+  {
+   "slug": "space",
+   "name": "Космос",
+   "file": "backdrops/space.png"
+  },
+  {
+   "slug": "naboo",
+   "name": "Посадка на Набу",
+   "file": "backdrops/naboo.png"
+  },
+  {
+   "slug": "generator",
+   "name": "Генераторная",
+   "file": "backdrops/generator.png"
+  },
+  {
+   "slug": "victory",
+   "name": "Победа",
+   "file": "backdrops/victory.png"
+  }
+ ]
+}
