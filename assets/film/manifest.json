@@ -1,0 +1,92 @@
+{
+ "sprites": [
+  {
+   "slug": "quigon",
+   "name": "Квай-Гон",
+   "w": 707,
+   "h": 455,
+   "costumes": [
+    {
+     "name": "стойка",
+     "file": "sprites/quigon/quigon-1.png"
+    },
+    {
+     "name": "атака",
+     "file": "sprites/quigon/quigon-2.png"
+    }
+   ]
+  },
+  {
+   "slug": "obiwan",
+   "name": "Оби-Ван",
+   "w": 887,
+   "h": 455,
+   "costumes": [
+    {
+     "name": "стойка",
+     "file": "sprites/obiwan/obiwan-1.png"
+    },
+    {
+     "name": "атака",
+     "file": "sprites/obiwan/obiwan-2.png"
+    }
+   ]
+  },
+  {
+   "slug": "maul",
+   "name": "Дарт Мол",
+   "w": 1015,
+   "h": 455,
+   "costumes": [
+    {
+     "name": "стойка",
+     "file": "sprites/maul/maul-1.png"
+    }
+   ]
+  },
+  {
+   "slug": "naboo-fighter",
+   "name": "Истребитель",
+   "w": 296,
+   "h": 300,
+   "costumes": [
+    {
+     "name": "двигатель-1",
+     "file": "sprites/naboo-fighter/naboo-fighter-1.png"
+    },
+    {
+     "name": "двигатель-2",
+     "file": "sprites/naboo-fighter/naboo-fighter-2.png"
+    },
+    {
+     "name": "двигатель-3",
+     "file": "sprites/naboo-fighter/naboo-fighter-3.png"
+    }
+   ]
+  },
+  {
+   "slug": "droid-fighter",
+   "name": "Дроид-истребитель",
+   "w": 476,
+   "h": 260,
+   "costumes": [
+    {
+     "name": "крылья-открыты",
+     "file": "sprites/droid-fighter/droid-fighter-1.png"
+    }
+   ]
+  }
+ ],
+ "backdrops": [
+  {
+   "slug": "title",
+   "name": "Титул",
+   "file": "backdrops/title.png"
+  },
+  {
+   "slug": "space",
+   "name": "Космос",
+   "file": "backdrops/space.png"
+  }
+ ]
+}
