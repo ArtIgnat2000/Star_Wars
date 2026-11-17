@@ -1,0 +1,49 @@
+{
+ "sprites": [
+  {
+   "slug": "pod",
+   "name": "Под",
+   "costumes": [
+    {
+     "name": "под",
+     "file": "assets/pod/sprites/pod.png",
+     "w": 1379,
+     "h": 502,
+     "cx": 689.5,
+     "cy": 251.0
+    }
+   ]
+  },
+  {
+   "slug": "rock",
+   "name": "Скала",
+   "costumes": [
+    {
+     "name": "скала",
+     "file": "assets/pod/sprites/rock.png",
+     "w": 478,
+     "h": 680,
+     "cx": 239.0,
+     "cy": 340.0
+    }
+   ]
+  }
+ ],
+ "backdrops": [
+  {
+   "slug": "track",
+   "name": "Трасса",
+   "file": "assets/pod/backdrops/track.png"
+  },
+  {
+   "slug": "win",
+   "name": "Финиш",
+   "file": "assets/pod/backdrops/win.png"
+  },
+  {
+   "slug": "lose",
+   "name": "Авария",
+   "file": "assets/pod/backdrops/lose.png"
+  }
+ ]
+}
