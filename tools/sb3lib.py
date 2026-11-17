@@ -119,8 +119,9 @@ def touching(name):
 
 
 def dist(name):
+    # вход именно DISTANCETOMENU — с другим именем scratch-vm вернёт 10000
     return rep(n("sensing_distanceto",
-                 {"DISTANCETO": menu("sensing_distancetomenu", DISTANCETO=[name, None])}))
+                 {"DISTANCETOMENU": menu("sensing_distancetomenu", DISTANCETO=[name, None])}))
 
 
 def prop_of(prop, obj):

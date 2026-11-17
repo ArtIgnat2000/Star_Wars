@@ -1,0 +1,79 @@
+{
+ "sprites": [
+  {
+   "slug": "luke",
+   "name": "Люк",
+   "costumes": [
+    {
+     "name": "бег-1",
+     "file": "assets/escape/sprites/luke-run1.png",
+     "w": 272,
+     "h": 300,
+     "cx": 136.0,
+     "cy": 150.0
+    },
+    {
+     "name": "бег-2",
+     "file": "assets/escape/sprites/luke-run2.png",
+     "w": 243,
+     "h": 300,
+     "cx": 121.5,
+     "cy": 150.0
+    }
+   ]
+  },
+  {
+   "slug": "obstacle",
+   "name": "Препятствие",
+   "costumes": [
+    {
+     "name": "ящик",
+     "file": "assets/escape/sprites/crate.png",
+     "w": 125,
+     "h": 70,
+     "cx": 62.5,
+     "cy": 35.0
+    },
+    {
+     "name": "дроид",
+     "file": "assets/escape/sprites/droid.png",
+     "w": 75,
+     "h": 70,
+     "cx": 37.5,
+     "cy": 35.0
+    }
+   ]
+  },
+  {
+   "slug": "cell",
+   "name": "Ячейка",
+   "costumes": [
+    {
+     "name": "ячейка",
+     "file": "assets/escape/sprites/cell.png",
+     "w": 54,
+     "h": 96,
+     "cx": 27.0,
+     "cy": 48.0
+    }
+   ]
+  }
+ ],
+ "backdrops": [
+  {
+   "slug": "corridor",
+   "name": "Коридор",
+   "file": "assets/escape/backdrops/corridor.png"
+  },
+  {
+   "slug": "win",
+   "name": "Ангар",
+   "file": "assets/escape/backdrops/win.png"
+  },
+  {
+   "slug": "lose",
+   "name": "Поймали",
+   "file": "assets/escape/backdrops/lose.png"
+  }
+ ]
+}

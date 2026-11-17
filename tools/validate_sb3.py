@@ -82,7 +82,7 @@ def main(path):
                 if v not in sprite_names and v != "_myself_":
                     errs.append(f"{tn}: clone '{v}' — нет такого спрайта")
             if op == "sensing_distanceto":
-                m = blocks.get(b["inputs"]["DISTANCETO"][1])
+                m = blocks.get(b["inputs"]["DISTANCETOMENU"][1])
                 v = m["fields"]["DISTANCETO"][0]
                 if v not in sprite_names and v != "_mouse_":
                     errs.append(f"{tn}: distance to '{v}' — нет такого спрайта")
