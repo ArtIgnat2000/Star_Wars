@@ -1,0 +1,103 @@
+{
+ "sprites": [
+  {
+   "slug": "korabl",
+   "name": "Корабль",
+   "costumes": [
+    {
+     "name": "двигатель-1",
+     "file": "assets/film/sprites/naboo-fighter/naboo-fighter-1.png",
+     "w": 304,
+     "h": 300,
+     "cx": 152.0,
+     "cy": 150.0
+    },
+    {
+     "name": "двигатель-2",
+     "file": "assets/film/sprites/naboo-fighter/naboo-fighter-2.png",
+     "w": 304,
+     "h": 300,
+     "cx": 152.0,
+     "cy": 150.0
+    },
+    {
+     "name": "двигатель-3",
+     "file": "assets/film/sprites/naboo-fighter/naboo-fighter-3.png",
+     "w": 304,
+     "h": 300,
+     "cx": 152.0,
+     "cy": 150.0
+    }
+   ]
+  },
+  {
+   "slug": "droid",
+   "name": "Дроид",
+   "costumes": [
+    {
+     "name": "дроид",
+     "file": "assets/film/sprites/droid-fighter/droid-fighter-1.png",
+     "w": 494,
+     "h": 260,
+     "cx": 247.0,
+     "cy": 130.0
+    },
+    {
+     "name": "взрыв-1",
+     "file": "assets/film/sprites/explosion/explosion-1.png",
+     "w": 170,
+     "h": 170,
+     "cx": 85.0,
+     "cy": 85.0
+    },
+    {
+     "name": "взрыв-2",
+     "file": "assets/film/sprites/explosion/explosion-2.png",
+     "w": 170,
+     "h": 170,
+     "cx": 85.0,
+     "cy": 85.0
+    },
+    {
+     "name": "взрыв-3",
+     "file": "assets/film/sprites/explosion/explosion-3.png",
+     "w": 170,
+     "h": 170,
+     "cx": 85.0,
+     "cy": 85.0
+    }
+   ]
+  },
+  {
+   "slug": "laser",
+   "name": "Лазер",
+   "costumes": [
+    {
+     "name": "болт",
+     "file": "assets/arcade/sprites/laser.png",
+     "w": 18,
+     "h": 52,
+     "cx": 9.0,
+     "cy": 26.0
+    }
+   ]
+  }
+ ],
+ "backdrops": [
+  {
+   "slug": "space",
+   "name": "Космос",
+   "file": "assets/arcade/backdrops/space.png"
+  },
+  {
+   "slug": "win",
+   "name": "Победа",
+   "file": "assets/arcade/backdrops/win.png"
+  },
+  {
+   "slug": "lose",
+   "name": "Поражение",
+   "file": "assets/arcade/backdrops/lose.png"
+  }
+ ]
+}
