@@ -102,6 +102,22 @@ def main():
 <div class='card'><img src='duel-lite-5.png' alt='Победа'>
 <h3 style='margin-top:10px'>Победа — герой поднимает меч</h3></div>
 </div>
+<h2>Аркада — «Сбей дроидов» (100 блоков)</h2>
+<p class='sub'>Самая короткая игра: корабль Набу внизу, дроиды-стервятники падают сверху.
+← → — вести корабль, ПРОБЕЛ — выстрел. Сбить 8 дроидов — победа, пропустить 5 — поражение.
+Скриптов всего пять, блоков — 100: только переменные, «повторять пока» и клоны.</p>
+<div class='grid'>
+<div class='card'><img src='arcade-1.png' alt='Игра «Сбей дроидов»'>
+<h3 style='margin-top:10px'>Бой: болт летит в дроида</h3></div>
+<div class='card'><img src='arcade-2.png' alt='Победа'>
+<h3 style='margin-top:10px'>Победа на 8 очках</h3></div>
+<div class='card'><img src='arcade-3.png' alt='Поражение'>
+<h3 style='margin-top:10px'>Поражение: пять пропущено</h3></div>
+</div>
+<div class='dl'><a class='btn' href='/star_wars_arcade.sb3' download>
+Скачать star_wars_arcade.sb3 · 1,4 МБ</a>
+<span class='hint'>Правила и разбор скриптов — в docs/АРКАДА.md</span></div>
+
 <div class='dl'><a class='btn' href='/star_wars_duel_lite.sb3' download>
 Скачать star_wars_duel_lite.sb3 · 6,1 МБ</a>
 <span class='hint'>Правила и скрипты — в docs/ДУЭЛЬ_НА_МЕЧАХ.md</span></div>
